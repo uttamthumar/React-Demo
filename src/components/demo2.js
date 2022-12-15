@@ -39,7 +39,13 @@ function Demo() {
       setToggle(!toggle);
     });
   }
-
+  function selectUser(id) {
+    const user = userData.filter((user) => user.id === id);
+    console.log("user",user[0])
+   
+    setInputData(user[0])
+  }
+console.log("setuserdata",inputData)
   return (
     <>
       <div>
@@ -77,6 +83,9 @@ function Demo() {
                   <td>{item.id}</td>
                   <td>
                     <button onClick={() => deleteUser(item.id)}>Delete</button>
+                  </td>
+                  <td>
+                    <button onClick={() => selectUser(item.id)}>Update</button>
                   </td>
                 </tr>
               ))}
