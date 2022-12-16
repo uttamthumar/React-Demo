@@ -34,23 +34,13 @@ function Use() {
   }
 
   function updateUser() {
-  
-      let item={firstname,lastname,city}
- 
-      fetch(`http://localhost:5000/user/${userId}`, data, {
-        method: 'PATCH',
-        headers:{
-          'Accept':'application/json',
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify(item)
-      }).then((result) => {
-        result.json().then((resp) => {
-          console.log("resp",resp)
-        })
-      })
-    }
-  
+    axios
+      .patch(`http://localhost:5000/user/${userId}`, { data })
+      .then((resp) => {
+        setToggle(!toggle);
+        console.log("inputData", firstname, lastname, city);
+      });
+  }
 
   return (
     <div>

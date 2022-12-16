@@ -8,10 +8,11 @@ function Demo() {
   const [toggle, setToggle] = useState(false);
   const [inputData, setInputData] = useState({
     firstName: "",
-    lastname: "",
+    lastName: "",
     city: "",
+    id: "",
   });
-
+  const [isDisabled, setDisabled] = useState(false);
   const handleInput = (name, value) => {
     setInputData(() => {
       return {
@@ -27,10 +28,11 @@ function Demo() {
     });
   }, [toggle]);
   function saveData(e) {
-    e.preventDefault();
-
     axios.post("http://localhost:5000/user", inputData).then((resp) => {
       setToggle(!toggle);
+
+      console.log("res", resp);
+      console.log("!isDisabled", isDisabled);
     });
     setInputData("");
   }
@@ -41,11 +43,20 @@ function Demo() {
   }
   function selectUser(id) {
     const user = userData.filter((user) => user.id === id);
-    console.log("user",user[0])
-   
-    setInputData(user[0])
+    setInputData(user[0]);
+    setDisabled(false);
   }
-console.log("setuserdata",inputData)
+  function updateUser() {
+    axios
+      .patch(`http://localhost:5000/user/${inputData.id}`, inputData)
+      .then((resp) => {
+        setToggle(!toggle);
+        setDisabled(true);
+        console.log("PATCH Respon", resp);
+      });
+    console.log("PATCH setuserdata", inputData);
+    setInputData("");
+  }
   return (
     <>
       <div>
@@ -61,8 +72,17 @@ console.log("setuserdata",inputData)
               />
             );
           })}
-          <button type="button" onClick={saveData}>
-            Save New User
+          <button
+            type="button"
+            onClick={() => {
+              if (isDisabled) {
+                saveData();
+              } else {
+                updateUser();
+              }
+            }}
+          >
+            {isDisabled ? "Save New User" : "Update"}
           </button>
         </div>
         <div>
@@ -78,7 +98,7 @@ console.log("setuserdata",inputData)
               {userData.map((item, I) => (
                 <tr key={I}>
                   <td>{item.firstName}</td>
-                  <td>{item.lastname}</td>
+                  <td>{item.lastName}</td>
                   <td>{item.city}</td>
                   <td>{item.id}</td>
                   <td>
