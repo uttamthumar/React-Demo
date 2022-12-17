@@ -1,8 +1,8 @@
 const InputUserData = [
   {
-    id: "firstName",
-    name: "firstName",
-    type: "text",
+      id: "firstName",
+      name: "firstName",
+      type: "text",
   },
   {
     id: "lastName",

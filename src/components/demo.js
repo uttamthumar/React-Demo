@@ -8,7 +8,7 @@ function Use() {
   const [lastname, setLastName] = useState("");
   const [city, setCity] = useState("");
   const [userId, setUserId] = useState("");
-  useEffect(() => {
+  useEffect(() => { 
     axios.get("http://localhost:5000/user").then((result) => {
       console.log(" setUserId1", result.data.data[0].id);
       setData(result.data.data);

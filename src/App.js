@@ -1,13 +1,11 @@
 import "./App.css";
-import Use from "./components/demo";
-import Demo from "./components/demo2";
-import Hideandshow from "./components/hideandshow";
-import Preste from "./components/preState";
+
+import ApiDemo from "./components/ApiDemo"
 
 function App() {
   return (
     <div>
-      <Preste />
+      <ApiDemo />
     </div>
   );
 }
