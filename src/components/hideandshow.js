@@ -14,12 +14,11 @@ class Hideandshow extends React.Component {
       <>
         {this.state.show ? <h1>{this.props.name}</h1> : null}
         <button
-          onClick={() => {
+          onClick={(pre) => {
             this.setState({ show: !this.state.show });
             console.log("this.state.show", !this.state.show);
           }}
         >
-          {" "}
           Hello
         </button>
       </>
