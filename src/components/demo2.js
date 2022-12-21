@@ -14,7 +14,7 @@ function Demo() {
     firstName: "",
     lastName: "",
     city: "",
-    id: "",
+    _id: "",
   });
   const [isDisabled, setDisabled] = useState(false);
   const handleClose = () => setShow(false);
@@ -29,39 +29,38 @@ function Demo() {
   };
   useEffect(() => {
     console.log("getapi");
-    axios.get("http://localhost:5000/user").then((result) => {
-      setUserData(result.data.data);
+    axios.get("http://localhost:7000/todos").then((result) => {
+      setUserData(result.data);
     });
   }, [toggle]);
   function saveData(e) {
-    axios.post("http://localhost:5000/user", inputData).then((resp) => {
+    axios.post("http://localhost:7000/todos", inputData).then((resp) => {
       setToggle(!toggle);
-
       console.log("res", resp);
       console.log("!isDisabled", isDisabled);
     });
     setInputData("");
   }
-  function deleteUser(id) {
-    axios.delete(`http://localhost:5000/user/${id}`).then((result) => {
+  function deleteUser(_id) {
+    axios.delete(`http://localhost:7000/todos/${_id}`).then((result) => {
       setToggle(!toggle);
     });
   }
-  function selectUser(id) {
-    const user = userData.filter((user) => user.id === id);
+  function selectUser(_id) {
+    const user = userData.filter((user) => user._id === _id);
     setInputData(user[0]);
     setShow(!show);
     setDisabled(false);
   }
   function updateUser() {
     axios
-      .patch(`http://localhost:5000/user/${inputData.id}`, inputData)
+      .put(`http://localhost:7000/todos/${inputData._id}`, inputData)
       .then((resp) => {
         setToggle(!toggle);
         setDisabled(true);
         console.log("PATCH Respon >>>>>>", resp);
       });
-    console.log("PATCH setuserdata", inputData);
+
     setInputData("");
   }
   return (
@@ -126,16 +125,16 @@ function Demo() {
                     <td>{item.firstName}</td>
                     <td>{item.lastName}</td>
                     <td>{item.city}</td>
-                    <td>{item.id}</td>
+                    <td>{item._id}</td>
                     <td>
-                      <button onClick={() => deleteUser(item.id)}>
+                      <button onClick={() => deleteUser(item._id)}>
                         Delete
                       </button>
                     </td>
                     <td>
                       <button
                         onClick={() => {
-                          selectUser(item.id);
+                          selectUser(item._id);
                         }}
                       >
                         Update

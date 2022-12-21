@@ -24,7 +24,7 @@ function ApiDemo() {
   };
   useEffect(() => {
     getData();
-  }, [toggle]);
+  }, []);
 
   function getData() {
     return axios.get("https://reqres.in/api/users?page=2").then((result) => {
