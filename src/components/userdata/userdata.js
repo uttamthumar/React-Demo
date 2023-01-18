@@ -1,18 +1,23 @@
 const InputUserData = [
   {
-      id: "firstName",
-      name: "firstName",
-      type: "text",
-  },
-  {
-    id: "lastName",
-    name: "lastName",
+    id: "Name",
+    name: "Name",
     type: "text",
   },
   {
-    id: "City",
-    name: "city",
-    type: "text",
+    id: "Email",
+    name: "Email",
+    type: "email",
+  },
+  {
+    id: "Birthdate",
+    name: "Birthdate",
+    type: "date",
+  },
+  {
+    id: "Password",
+    name: "Password",
+    type: "password",
   },
 ];
 

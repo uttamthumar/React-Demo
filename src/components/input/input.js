@@ -1,7 +1,7 @@
 import React from "react";
 
 function Input({ item, onChange, value }) {
-  console.log("item.value", value, value[item.name]);
+
   return (
     <div className="">
       <h1>{item.id}</h1>

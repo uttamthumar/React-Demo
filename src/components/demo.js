@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import { Table } from "react-bootstrap";
+import Featchdata from "../components/Test";
 
 function Use() {
-  const [data, setData] = useState([]);
+  const [data] = Featchdata("http://localhost:7000/todos");
 
-  useEffect(() => { 
-    axios.get("http://localhost:7000/todos/").then((result) => {
-      console.log(" setUserId1", result);
-      setData(result.data);
-   
-    });
-  }, []);
   // function deleteUser(id) {
   //   axios.delete(`http://localhost:5000/user/${id}`).then((result) => {
   //     setToggle(!toggle);
@@ -37,7 +31,7 @@ function Use() {
 
   return (
     <div>
-      <table border={2}>
+      <Table striped bordered hover variant="secondary">
         <tbody>
           <tr>
             <td>FirstName</td>
@@ -53,15 +47,15 @@ function Use() {
               <td>{item.city}</td>
               <td>{item._id}</td>
               <td>
-                <button >Delete</button>
+                <button>Delete</button>
               </td>
               <td>
-                <button >Update</button>
+                <button>Update</button>
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
 
       {/* <div>
         <input
